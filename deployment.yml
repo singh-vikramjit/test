@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dulcet-provider
+  labels:
+    #Project ID
+    app: dulcet-provider-227607
+spec:
+  #Run two instances of our application
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dulcet-provider-227607
+    spec:
+      #Container details
+      containers:
+        - name: dulcet-provider
+          image: gcr.io/dulcet-provider-227607/dulcet-provider:latest
+          imagePullPolicy: Always
+          #Ports to expose
+          ports:
+          - containerPort: 8000
+

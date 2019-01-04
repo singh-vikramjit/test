@@ -1,0 +1,14 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ["build", "-t", "gcr.io/dulcet-provider-227607/dulcet-provider:$REVISION_ID", "."]
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['set', 'image', 'deployment/dulcet-provider', 'dulcet-provider=gcr.io/dulcet-provider-227607/dulcet-provider:$REVISION_ID']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=tl-cluster-1'
+
+
+images:
+- 'gcr.io/dulcet-provider-227607/dulcet-provider:$REVISION_ID'
+tags:
+- 'gcp-qa-self'
