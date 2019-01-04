@@ -4,8 +4,8 @@ steps:
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['set', 'image', 'deployment/dulcet-provider', 'dulcet-provider=gcr.io/dulcet-provider-227607/dulcet-provider:$REVISION_ID']
   env:
-  - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=tl-cluster-1'
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=standard-cluster-1'
 
 
 images:
