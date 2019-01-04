@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.2-apache
 COPY . /var/www/html/
 WORKDIR "/var/www/html/"
 
@@ -20,7 +20,6 @@ RUN composer install -n --prefer-dist
 
 RUN ls -al
 
-RUN chmod -R 0777 tl/tmp
 RUN a2enmod rewrite
 
 #RUN pecl install stackdriver_debugger-alpha
