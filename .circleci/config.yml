@@ -54,4 +54,11 @@ jobs:
 
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit
-      
+nightly:
+  triggers:
+    - schedule:
+        cron: "*/15 * * * *"
+        filters:
+          branches:
+            only:
+              - master    
