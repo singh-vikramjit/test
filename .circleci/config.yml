@@ -59,7 +59,7 @@ workflows:
   version: 2
   commit-workflow:
     jobs:
-      - build:
+      - build
 
   scheduled-workflow:
     triggers:
@@ -70,5 +70,5 @@ workflows:
               only:
                 - master  
     jobs:
-      - build:
+      - build
           
