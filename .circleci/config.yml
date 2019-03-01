@@ -2,7 +2,6 @@
 #
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
-version: 2
 commit-workflow:
   jobs:
     - build:
@@ -55,6 +54,7 @@ commit-workflow:
 
         # run tests with phpunit or codecept
         - run: ./vendor/bin/phpunit 
+
 scheduled-workflow:
   triggers:
     - schedule:
