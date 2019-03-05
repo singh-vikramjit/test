@@ -71,15 +71,15 @@ workflows:
     jobs:
       - build
 
-  scheduled-workflow:
-    triggers:
-      - schedule:
-          cron: "0 * * * *"
-          filters:
-            branches:
-              only:
-                - master  
-    jobs:
-      - build
-      - deploy
+  # scheduled-workflow:
+  #   triggers:
+  #     - schedule:
+  #         cron: "0 * * * *"
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master  
+  #   jobs:
+  #     - build
+  #     - deploy
           
