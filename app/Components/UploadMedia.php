@@ -30,11 +30,11 @@ class UploadMedia
      */
     public function scaleImage($filename, $scale){
         $scaled_filename = $scale.'_'.$filename;
-        $scaled_file_path = str_replace('/app', '', public_path('uploads/'.$scaled_filename));
-        $file_path = str_replace('/app', '', public_path('uploads/'.$filename));
+        $scaled_file_path = str_replace('/app/', '', public_path('uploads/'.$scaled_filename));
+        $file_path = str_replace('/app/', '', public_path('uploads/'.$filename));
 
-        \Log::info('Public file path - '.$file_path);
-        \Log::info('Scale file path - '.$scaled_file_path);
+        \Log::info('Public File path - '.$file_path);
+        \Log::info('Scale File path - '.$scaled_file_path);
         
         exec('ffmpeg -i '.$file_path.' -vf scale='.$scale.':-1 '.$scaled_file_path);
         return $scaled_filename;
