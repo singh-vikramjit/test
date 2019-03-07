@@ -14,18 +14,18 @@ class UploadMediaController extends Controller
 
     public function index()
     {
-        $orignalFileUrl = $scaledFileUrl = '';
+        $orignal_file_url = $scaled_file_url = '';
         if (request()->isMethod('post')) {
             request()->validate([
                                     'image' => 'required|image',
                                     'scale' => 'required|numeric|min:9|max:2000',
                                 ]);
             $filename = $this->uploadImage(request()->file('image'));
-            $orignalFileUrl = $this->fileUrl($filename);
-            $scaledFileName = $this->scaleImage($filename, request()->scale);
-            $scaledFileUrl = $this->fileUrl($scaledFileName);
+            $orignal_file_url = $this->fileUrl($filename);
+            $scaled_filename = $this->scaleImage($filename, request()->scale);
+            $scaled_file_url = $this->fileUrl($scaled_filename);
         }
-        return view('uploadFile', compact(['orignalFileUrl','scaledFileUrl']));
+        return view('uploadFile', compact(['orignal_file_url','scaled_file_url']));
     }
 
     private function uploadImage($image){
@@ -39,9 +39,9 @@ class UploadMediaController extends Controller
     }
 
     private function scaleImage($filename, $scale){
-        $scaledFileName = $scale.'_'.$filename;
-        $scaledFilePath = public_path('uploads/'.$scaledFileName);
-        exec('ffmpeg -i '.public_path('uploads/'.$filename).' -vf scale='.$scale.':-1 '.$scaledFilePath);
-        return $scaledFileName;
+        $scaled_filename = $scale.'_'.$filename;
+        $scaled_file_path = public_path('uploads/'.$scaled_filename);
+        exec('ffmpeg -i '.public_path('uploads/'.$filename).' -vf scale='.$scale.':-1 '.$scaled_file_path);
+        return $scaled_filename;
     }
 }

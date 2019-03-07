@@ -59,13 +59,13 @@
     </div>
 
 
-    @if (!empty($orignalFileUrl))
+    @if (!empty($orignal_file_url))
     <div class="row">
         <div class="col-md-8">
-            <img width="100%" style="padding: 20px 30px 10px;" src="{{ $orignalFileUrl }}">
+            <img width="100%" style="padding: 20px 30px 10px;" src="{{ $orignal_file_url }}">
         </div>
         <div class="col-md-4">
-            <img width="100%" style="padding: 20px 30px 10px;" src="{{ $scaledFileUrl }}">
+            <img width="100%" style="padding: 20px 30px 10px;" src="{{ $scaled_file_url }}">
         </div>
     </div>                   
     @endif
