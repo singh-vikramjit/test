@@ -42,8 +42,8 @@ class UploadMediaController extends Controller
 
     private function scaleImage($filename, $scale){
         $scaledFileName = $scale.'_'.$filename;
-        $scaledFilePath = storage_path('app/public/'.$scaledFileName);
-        exec('ffmpeg -i '.storage_path('app/public/'.$filename).' -vf scale='.$scale.':-1 '.$scaledFilePath);
+        $scaledFilePath = public_path('uploads/'.$scaledFileName);
+        exec('ffmpeg -i '.public_path('uploads/'.$filename).' -vf scale='.$scale.':-1 '.$scaledFilePath);
         return $scaledFileName;
     }
 }
