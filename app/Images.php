@@ -25,7 +25,8 @@ class Images extends Model
 
     public function getScaledFileUrlAttribute()
     {
-        $scaled_filename = $this->attributes['scaled_filename'];
-        return $this->attributes['scaled_file_url'] = ($scaled_filename) ? (new UploadMedia)->fileUrl($scaled_filename) : '';
+        $attributes = $this->attributes;
+        $scaled_filename = $attributes['scaled_filename'];
+        return $attributes['scaled_file_url'] = ($scaled_filename) ? (new UploadMedia)->fileUrl($scaled_filename) : '';
     }
 }
