@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Storage;
 class UploadMedia
 {
     public function __construct(){
-        // 
+        //
     }
 
     /**
-     * upload image to default Storage disk  
+     * upload image to default Storage disk
      */
     public function uploadImage($image){
         $filename = rand() . '_' . $image->getClientOriginalName();
@@ -19,14 +19,14 @@ class UploadMedia
     }
 
     /**
-     * get image URL from default Storage disk  
+     * get image URL from default Storage disk
      */
     public function fileUrl($filename){
         return Storage::url($filename);
     }
 
     /**
-     * scale the given image to given scale size   
+     * scale the given image to given scale size
      */
     public function scaleImage($filename, $scale){
         $scaled_filename = $scale.'_'.$filename;
