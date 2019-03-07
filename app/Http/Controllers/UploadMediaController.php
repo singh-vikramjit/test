@@ -20,11 +20,9 @@ class UploadMediaController extends Controller
                                     'image' => 'required|image',
                                     'scale' => 'required|numeric|min:9|max:2000',
                                 ]);
-            $image = request()->file('image');
-            $scale = request()->scale;
-            $filename = $this->uploadImage($image);
+            $filename = $this->uploadImage(request()->file('image'));
             $orignalFileUrl = $this->fileUrl($filename);
-            $scaledFileName = $this->scaleImage($filename, $scale);
+            $scaledFileName = $this->scaleImage($filename, request()->scale);
             $scaledFileUrl = $this->fileUrl($scaledFileName);
         }
         return view('uploadFile', compact(['orignalFileUrl','scaledFileUrl']));
