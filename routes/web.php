@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/sheet', 'HomeController@index')->name('sheet');
 
 Route::get('/home', 'UploadMediaController@index')->name('home');
 Route::get('/uploadFile', 'UploadMediaController@create')->name('uploadFile');
