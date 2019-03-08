@@ -47,12 +47,10 @@ class UploadMedia
      * get image URL from default Storage disk
      */
     public function makeTempDir(){
-        $oldmask = umask(0);
-        mkdir(public_path('uploads'), 0777, true);
-        umask($oldmask);
-
-        if (is_dir(public_path('uploads'))) {
-            \Log::info('Exist');
+        if (!is_dir(public_path('uploads'))) {
+            $oldmask = umask(0);
+            mkdir(public_path('uploads'), 0777, true);
+            umask($oldmask);
         }
     }
 
