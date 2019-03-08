@@ -44,10 +44,21 @@ class UploadMedia
     }
 
     /**
+     * get image URL from default Storage disk
+     */
+    public function makeTempDir(){
+        \Log::info("App path ". app_path());
+        $oldmask = umask(0);
+        mkdir(app_path()."/public/uploads", 0777, true);
+        umask($oldmask);
+    }
+
+    /**
      * scale the given image to given scale size
      */
     public function scaleImage($filename, $scale){
         $scaled_filename = $scale.'_'.$filename;
+        $this->makeTempDir();
         $scaled_file_path = public_path('uploads/'.$scaled_filename);
         $file_path = $this->fileUrl($filename);
         exec('ffmpeg -i '.$file_path.' -vf scale='.$scale.':-1 '.$scaled_file_path);
