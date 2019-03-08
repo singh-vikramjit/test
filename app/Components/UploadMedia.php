@@ -26,6 +26,7 @@ class UploadMedia
             $image_name = end(explode('/', $image));
         }
         Storage::put($image_name, fopen($image, 'r+'), 'public');
+        unlink($image); // unlink file from server
         return $image_name;
     }
 
