@@ -48,10 +48,10 @@ class UploadMedia
      */
     public function makeTempDir(){
         $oldmask = umask(0);
-        mkdir("/app/public/uploads", 0777, true);
+        mkdir(public_path('uploads'), 0777, true);
         umask($oldmask);
 
-        if (is_dir('/app/public/uploads')) {
+        if (is_dir(public_path('uploads'))) {
             \Log::info('Exist');
         }
     }
