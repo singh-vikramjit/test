@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UploadMediaRequest;
-use Illuminate\Support\Facades\Storage;
 use App\Components\UploadMedia;
 use App\Images;
 
@@ -20,9 +19,8 @@ class UploadMediaController extends Controller
         return view('home', compact('images'));
     }
 
-    public function store(UploadMediaRequest $request)
+    public function store(UploadMediaRequest $request, UploadMedia $upload_media)
     {
-        $upload_media = new UploadMedia();
         $filename = $upload_media->uploadImageObject($request->file('image'));
         $orignal_file_url = $upload_media->fileUrl($filename);
         Images::create(['filename' => $filename, 'scale_size' => $request->scale]);

@@ -75,6 +75,5 @@ class HomeController extends Controller
         ServiceRequestFactory::setInstance(
             new DefaultServiceRequest($accessToken)
         );
-        return $client;
     }
 }
