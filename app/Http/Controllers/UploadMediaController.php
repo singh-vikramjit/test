@@ -23,7 +23,7 @@ class UploadMediaController extends Controller
     public function store(UploadMediaRequest $request)
     {
         $upload_media = new UploadMedia();
-        $filename = $upload_media->uploadImage($request->file('image'));
+        $filename = $upload_media->uploadImageObject($request->file('image'));
         $orignal_file_url = $upload_media->fileUrl($filename);
         Images::create(['filename' => $filename, 'scale_size' => $request->scale]);
         return view('uploadFile', compact(['orignal_file_url']));

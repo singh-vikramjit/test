@@ -10,12 +10,23 @@ class UploadMedia
     }
 
     /**
-     * upload image to default Storage disk
+     * upload image object to default Storage disk
      */
-    public function uploadImage($image){
+    public function uploadImageObject($image){
         $filename = rand() . '_' . $image->getClientOriginalName();
-        Storage::putFileAs('', $image, $filename);
+        Storage::put($filename, fopen($image, 'r+'), 'public');
         return $filename;
+    }
+
+    /**
+     * upload image vai path to default Storage disk
+     */
+    public function uploadImagePath($image, $image_name = null){
+        if (empty($image_name)) {
+            $image_name = end(explode('/', $image));
+        }
+        Storage::put($image_name, fopen($image, 'r+'), 'public');
+        return $image_name;
     }
 
     /**
@@ -26,13 +37,20 @@ class UploadMedia
     }
 
     /**
+     * get image URL from default Storage disk
+     */
+    public function getFile($filename){
+        return Storage::get($filename);
+    }
+
+    /**
      * scale the given image to given scale size
      */
     public function scaleImage($filename, $scale){
         $scaled_filename = $scale.'_'.$filename;
         $scaled_file_path = public_path('uploads/'.$scaled_filename);
-        $file_path = public_path('uploads/'.$filename);
+        $file_path = $this->fileUrl($filename);
         exec('ffmpeg -i '.$file_path.' -vf scale='.$scale.':-1 '.$scaled_file_path);
-        return $scaled_filename;
+        return $this->uploadImagePath($scaled_file_path, $scaled_filename);
     }
 }
