@@ -11,6 +11,8 @@ use Google_Service_Sheets;
 
 class HomeController extends Controller
 {
+    public $spreadsheet, $worksheet, $cell_feed;
+
     /**
      * Create a new controller instance.
      *
@@ -32,24 +34,24 @@ class HomeController extends Controller
         $this->getClient();
 
         //get sheet by name of the sheet
-        $spreadsheet = $this->getSheetByName('Google sheets reports');
+        $this->getSheetByName('Google sheets reports');
 
         // $spreadsheet contains the list of worksheets select the worksheet which you want to select by name
-        $worksheet = $this->getWorkSheetByName($spreadsheet, 'Master report');
+        $this->getWorkSheetByName('Master report');
         
-        $cellFeed = $worksheet->getCellFeed();
-        $cell = $cellFeed->getCell(3, 1);
+        $this->cell_feed = $this->worksheet->getCellFeed();
+
+        $cell = $this->cell_feed->getCell(3, 1);
         $cell->update(rand());
 
-        dd('done');
-        return view('home');
+        dd('updated');
     }
-
-    private function getWorkSheetByName(array $spreadsheet, string $title)
+    
+    private function getWorkSheetByName(string $title)
     {
-        foreach ($spreadsheet as $sheet) {
+        foreach ($this->spreadsheet as $sheet) {
             if ($sheet->getTitle() == trim($title)) {
-                return $sheet;
+                return $this->worksheet = $sheet;
             }
         }
         return false;
@@ -58,7 +60,7 @@ class HomeController extends Controller
     private function getSheetByName(string $title)
     {
         $spreadsheet = (new SpreadsheetService)->getSpreadsheetFeed()->getByTitle(trim($title));
-        return $spreadsheet->getWorksheetFeed()->getEntries();
+        return $this->spreadsheet = $spreadsheet->getWorksheetFeed()->getEntries();
     }
 
     private function getClient()
@@ -67,13 +69,13 @@ class HomeController extends Controller
         $client->setApplicationName('Google Sheets');
         $client->setScopes([Google_Service_Sheets::DRIVE, Google_Service_Sheets::SPREADSHEETS]);
         $client->setAccessType('offline');
-        $client->setAuthConfig(storage_path('client_secret.json'));
+        $client->setAuthConfig(config('sheet.auth'));
         if ($client->isAccessTokenExpired()) {
             $client->refreshTokenWithAssertion();
         }
-        $accessToken = $client->fetchAccessTokenWithAssertion()["access_token"];
+        $access_token = $client->fetchAccessTokenWithAssertion()["access_token"];
         ServiceRequestFactory::setInstance(
-            new DefaultServiceRequest($accessToken)
+            new DefaultServiceRequest($access_token)
         );
     }
 }
