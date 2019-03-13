@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/sheet', 'HomeController@index')->name('sheet');
 
+Route::get('/getCode', 'HomeController@getCode')->name('getCode');
+
 Route::get('/home', 'UploadMediaController@index')->name('home');
 Route::get('/uploadFile', 'UploadMediaController@create')->name('uploadFile');
 Route::post('/uploadFile', 'UploadMediaController@store')->name('storeUploadFile');
